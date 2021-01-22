@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css"  href="style1.css"/>
+    </head>
+    <body class="login">
+            <h1>Login here</h1>
+            <form name="f1" action="authentication.php" onsubmit="return validation()" method="POST">
+                <div class="loginbox">
+                <label><b>Name</b></label>
+                <input type="text" id="user" name="user"/>
+                <br><br>
+                <label><b>Password</b></label>
+                <input type="password" id="pass" name="pass"/>
+                <br><br>
+                <input type="submit" id="log" value="Login"/>
+            </div>
+        <script>
+            function validation()
+            {
+                var id=document.f1.user.value;
+                var ps=document.f1.pass.value;
+                if(id.length=="" && pa.length==""){
+                    alert("User name and password fields are empty");
+                    return false;
+                }
+                else{
+                        if(id.length==""){
+                            alert("User name is empty");
+                            return false;
+                        }
+                        if(ps.length==""){
+                            alert("Password field is empty");
+                            return false;
+                        
+                    }
+                }
+            }
+        </script>
+        </form>
+        
+    </body>
+</html>

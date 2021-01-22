@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.banner-area {
+  background-image: url(background_img3.jpg);
+  background-position: center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.paymentbox {
+  width: 500px;
+  clear: both;
+  overflow: hidden;
+  margin: auto;
+  padding: 70px;
+  border-radius: 10px;
+  border-color: #fff;
+  border-width: 5px;
+  border-style: solid;
+  vertical-align: middle;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  padding: 40px;
+}
+label {
+  color: #fff;
+  font-size: 17px;
+  text-align: center;
+}
+#name {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+}
+#dc_no {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+}
+#cvv {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 17px;
+  padding-left: 7px;
+  color: black;
+}
+
+#submit {
+  width: 480px;
+  height: 40px;
+  border: none;
+  border-radius: 17px;
+  padding-left: 7px;
+  color: black;
+}

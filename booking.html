@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Booking Page</title>
+        <link rel="stylesheet" type="text/css" href="booking.css">
+        <script type="text/javascript">
+           function dijkstras(){
+                console.log("hello");
+                var s=document.getElementById("start");
+                var src = s.options[s.selectedIndex].text;
+                var d=document.getElementById("dest");
+                var dest = d.options[d.selectedIndex].text;
+                var dict={"Trivandrum":0,"Kochi":1,"Bangalore":2,"Chennai":3,"Hyderabad":4,"Pune":5,"Goa":6,"Mumbai":7,"Ahmedabad":8,"Indore":9,"Raipur":10,"Bhubaneshwar":11,"Kolkata":12,"Ranchi":13,"Varanasi":14,"Udaipur":15,"Jodhpur":16,"Delhi":17,"Lucknow":18,"Patna":19,"Bagdogra":20,"Guhawati":21,"Dibrugarh":22,"Dehradun":23,"Chandigarh":24,"Amritsar":25,"Jammu":26,"Srinagar":27,"Leh":28,"PortBlair":29};
+                
+                var source=dict[src] ;
+                
+                var destination=dict[dest];  
+                          
+                var n=30;var i;var s=new Array(100);var d=new Array(50);
+                var k;var j;var min;var u;var m={};
+                let routes = new Array(30);
+                 routes=[[9999,   9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    2880.8, 9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999,    9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	2667.5,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	1007.7,	9999,	9999,	9999,	1442,	9999,	9999,	9999,	9999,	9999,	2126.9,	9999,	9999,	2039.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	1333.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	2197.3,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1372],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	719.2,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1069.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,    9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1398.3,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	599,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1968.2,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	1007.7,	1331.1,	719.2,	9999,	599,	9999,	9999,	9999,	1147.9,	9999,	2064.9,	9999,	1485.8,	776.8,	969.7,	1384.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	921,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	828.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	1147.9,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1234.6,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,    9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1718.2,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	2064.9,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1519.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1304],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,    9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1272.6,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	1485.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	809.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	776.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	663.6,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	969.7,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	594.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [2880.8,2667.5,	2126.9,	2197.3,	1609.1,	1398.3,	1968.2,	1384.1,	921,	828.1,	1234.6,	1718.2,	1519.1,	1272.6,	809.8,	663.6,	594.8,	9999,	534.3,	1069.9,	1434.4,	1911.1,	2329.7,	278.8,	260.8,	481.8,	601.7,	828.1,	977.4,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	534.3,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	2039.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1069.9,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1434.4,	9999,	9999,	9999,	9999,	895.5,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1911.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	2329.7,	9999,	9999,	895.5,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	278.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	260.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	481.8,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	601.7,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	270.1,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	828.1,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	270.1,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	977.4,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999],
+                    [9999,	9999,	9999,	1372,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	1304,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999,	9999] ];
+                for(i=1;i<=n;i++){
+                    s[i]=0;
+                    d[i]=routes[source][i];
+                }
+                d[source]=0;
+                s[source]=1;
+                for(k=2;k<=n;k++)
+                {
+                    min=9999;
+                    for(i=1;i<=n;i++)
+                    {
+                        if(d[i]<min && s[i]==0){
+                            min=d[i];
+                            u=i;
+                        }
+                    }
+                    s[u]=1;
+                    for(i=1;i<=n;i++){
+                        if(s[i]==0){
+                            if(d[i]>d[u]+routes[u][i]){
+                                d[i]=d[u]+routes[u][i];
+                                m[i]=[u,i];
+                                console.log(m[i]);
+                                
+                            }
+                        }
+                    }
+                    
+                }
+                    console.log(m);
+                    console.log(source,d[destination]);
+                    console.log(m[destination][0],m[destination][1]);
+                    for (var c in dict){
+                        if(dict[c]==m[destination][0]){
+                            var h1=c;
+                        }}
+                    for (var c in dict){
+                        if(dict[c]==m[destination][1]){
+                            var h2=c;;
+                        }
+                    }
+                    document.getElementById("t1").innerHTML="Path available with distance of "+d[destination]+"The path looks like this:"+src+" to"+h1+" to"+h2+"<br><a href='payment.html'>Click here to make payment</a>";
+                    
+           }
+        </script>
+    </head>
+    <body class="banner-area">
+        <header>
+            <ul class="menu">
+                <li><a href="seats.html"><b>Seats</b></a></li>
+                
+                
+            </ul>
+        </header>
+        
+            <h1>Make reservations here</h1>
+            <form >
+                <div class="book">
+                <label><b>Name</b></label>
+                <input type="text" name="name" id="name"/><br><br>
+                <label><b>Boarding point</b></label>
+                <select name="start" id="start">
+                    <option value="1">Trivandrum</option>
+                    <option value="2">Kochi</option>
+                    <option value="3">Bangalore</option>
+                    <option value="4">Chennai</option>
+                    <option value="5">Hyderabad</option>
+                    <option value="6">Pune</option>
+                    <option value="7">Goa</option>
+                    <option value="8">Mumbai</option>
+                    <option value="9">Ahmedabad</option>
+                    <option value="10">Indore</option>
+                    <option value="11">Raipur</option>
+                    <option value="12">Bhubaneshwar</option>
+                    <option value="13">Kolkata</option>
+                    <option value="14">Ranchi</option>
+                    <option value="15">Varanasi</option>
+                    <option value="16">Udaipur</option>
+                    <option value="17">Jodhpur</option>
+                    <option value="18">Delhi</option>
+                    <option value="19">Lucknow</option>
+                    <option value="20">Patna</option>
+                    <option value="21">Bagdogra</option>
+                    <option value="22">Guhawati</option>
+                    <option value="23">Dibrugarh</option>
+                    <option value="24">Dehradun</option>
+                    <option value="25">Chandigarh</option>
+                    <option value="26">Amritsar</option>
+                    <option value="27">Jammu</option>
+                    <option value="28">Srinagar</option>
+                    <option value="29">Leh</option>
+                    <option value="30">PortBlair</option>
+                </select>
+                <br><br>
+                <label><b>Destination</b></label>
+                <select name="dest" id="dest">
+                    <option value="1">Trivandrum</option>
+                    <option value="2">Kochi</option>
+                    <option value="3">Bangalore</option>
+                    <option value="4">Chennai</option>
+                    <option value="5">Hyderabad</option>
+                    <option value="6">Pune</option>
+                    <option value="7">Goa</option>
+                    <option value="8">Mumbai</option>
+                    <option value="9">Ahmedabad</option>
+                    <option value="10">Indore</option>
+                    <option value="11">Raipur</option>
+                    <option value="12">Bhubaneshwar</option>
+                    <option value="13">Kolkata</option>
+                    <option value="14">Ranchi</option>
+                    <option value="15">Varanasi</option>
+                    <option value="16">Udaipur</option>
+                    <option value="17">Jodhpur</option>
+                    <option value="18">Delhi</option>
+                    <option value="19">Lucknow</option>
+                    <option value="20">Patna</option>
+                    <option value="21">Bagdogra</option>
+                    <option value="22">Guhawati</option>
+                    <option value="23">Dibrugarh</option>
+                    <option value="24">Dehradun</option>
+                    <option value="25">Chandigarh</option>
+                    <option value="26">Amritsar</option>
+                    <option value="27">Jammu</option>
+                    <option value="28">Srinagar</option>
+                    <option value="29">Leh</option>
+                    <option value="30">PortBlair</option>
+                </select>
+                <br><br>
+                <label><b>Time</b></label>
+                <input type="time" id="time" name="time"/>
+                <br><br>
+                <label><b>Date</b></label>
+                <input type="date" id="date" name="date" />
+                <br><br>
+                
+                <input type="button" id="Next" name="Next" value="Next" onclick="dijkstras()"/><br><br>
+                
+                <div class="booking_info">
+                    <p id="t1">Wait a minute!</p>
+                </div>
+            </div>
+
+            </form>
+            
+        
+    </body>    
+
+</html>

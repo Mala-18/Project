@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order products</title>
+</head>
+<body>
+<form action="order.php" method="post">
+Enter name:<input type="text" name="NAME"/><br><br>
+Enter email-id:<input type="email" name="email"/><br><br>
+Enter Address:<input type="textbox" name="add"/><br><br>
+
+<table >
+<caption> Order Details</caption>
+<tr>
+	<th>Name</th>
+	<th>price</th>
+	<th>Quantity</th>
+</tr>
+<tr>
+	<td>Notebook</td>
+	<td>45</td>
+	<td><input type="number" name="quantity1"></td>
+</tr>
+<tr>
+	<td>Pens</td>
+	<td>30</td>
+	<td><input type="number" name="quantity2"></td>
+</tr>
+<tr>
+	<td>Highlighters</td>
+	<td>20</td>
+	<td><input type="number" name="quantity3"></td>
+</tr>
+<tr>
+	<td>Color pens</td>
+	<td>30</td>
+	<td><input type="number" name="quantity4"></td>
+</tr>
+<input type="submit" value="Confirm">
+</form>
+</body>
+</html>

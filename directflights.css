@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.banner-area {
+  background-image: url(background_img3.jpg);
+  background-position: center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  color: #fff;
+}
+
+ul {
+  padding: 0;
+  display: block;
+  margin: 24px auto;
+  width: 320px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.show1:hover ul.list1 {
+  max-height: inherit;
+  opacity: 1;
+}
+
+.list1 {
+  list-style-type: none;
+  padding: 0px;
+  margin-left: 300px;
+  max-height: 0px;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 300ms ease;
+}
+
+li {
+  display: block;
+  height: 42px;
+  width: 320px;
+  background-color: white;
+  text-align: center;
+  color: black;
+  animation-name: animateIn;
+  animation-duration: 350ms;
+  animation-delay: calc(var(--animation-order) * 100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  opacity: 0.8;
+}
+
+li + li {
+  margin-top: 16px;
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(-8px);
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
